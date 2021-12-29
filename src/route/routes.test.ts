@@ -4,7 +4,7 @@ describe("createRouteUrl", () => {
   test("should produce correct route", () => {
     const kanaiTotsuka: Route = {
       name: "kanai-totsuka",
-      cs: "0000800324",
+      cs: "0000800324-12",
       nid: "00126844",
       header: {
         busStop: Stop.kanai,

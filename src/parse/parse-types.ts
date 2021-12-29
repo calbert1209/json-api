@@ -43,5 +43,7 @@ export type RouteHeader = {
 
 export type RouteSchedule = {
   header: RouteHeader;
-  times: ScheduledStop[];
+  weekday: ScheduledStop[],
+  saturday: ScheduledStop[],
+  holiday: ScheduledStop[]
 };

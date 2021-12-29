@@ -12,14 +12,19 @@ const [_, , outputDir = "."] = process.argv;
 
 const fetchAndParseLane = async ({name, urls}: {name: string; urls: string[];}) => {
   let header: any = {};
-  let times: ScheduledStop[] = [];
+  let weekday: ScheduledStop[] = [];
+  let saturday: ScheduledStop[] = [];
+  let holiday: ScheduledStop[] = [];
+
   for (const url of urls) {
     try {
       console.log('trying to fetch', url);
       const htmlText = await getHttp(url);
       console.log('fetched', url);
       const routeSchedule = parseSinglePage(htmlText)
-      times = [...times, ...routeSchedule.times];
+      weekday = [...weekday, ...routeSchedule.weekday];
+      saturday = [...saturday, ...routeSchedule.saturday];
+      holiday = [...holiday, ...routeSchedule.holiday];
       header = routeSchedule.header;
     } catch (error) {
       console.error(error);
@@ -28,7 +33,9 @@ const fetchAndParseLane = async ({name, urls}: {name: string; urls: string[];}) 
   return {
     name,
     header,
-    times,
+    weekday,
+    saturday,
+    holiday,
   };
 }
 

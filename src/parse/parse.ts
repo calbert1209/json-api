@@ -134,7 +134,12 @@ export const parseSinglePage = (pageText: string): RouteSchedule => {
   const wd = parseSection(weekday);
   const sat = parseSection(saturday);
   const hol = parseSection(holiday);
-  return { header: head, times: [...wd, ...sat, ...hol] };
+  return {
+    header: head,
+    weekday: wd,
+    saturday: sat,
+    holiday: hol,
+  };
 };
 
 export const __testable = {

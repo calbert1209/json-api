@@ -1,5 +1,5 @@
 import { __testable as Parse } from "../parse";
-import { ScheduledStop, ScheduleType } from "../parse-types";
+import { ScheduleType } from "../parse-types";
 import {
   sampleHtml,
   sampleHeaderText,
@@ -10,7 +10,7 @@ import {
 
 describe("getSections", () => {
   const { header, weekday, saturday, holiday } = Parse.getSections(sampleHtml);
-  console.log(weekday);
+
   test("should return valid header", () => {
     expect(header).toEqual(sampleHeaderText);
   });

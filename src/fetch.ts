@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import {
   createRouteUrl,
+  RouteHeader,
   ROUTES
 } from './route/routes';
 import { ScheduledStop } from './parse/parse-types';
@@ -10,7 +11,13 @@ import { getHttp } from './http/get-http';
 
 const [_, , outputDir = "."] = process.argv;
 
-const fetchAndParseLane = async ({name, urls}: {name: string; urls: string[];}) => {
+type FetchParseLaneArgs = {
+  name: string;
+  urls: string[];
+  label: string;
+}
+
+const fetchAndParseLane = async ({name, label, urls}: FetchParseLaneArgs) => {
   let header: any = {};
   let weekday: ScheduledStop[] = [];
   let saturday: ScheduledStop[] = [];
@@ -32,7 +39,7 @@ const fetchAndParseLane = async ({name, urls}: {name: string; urls: string[];}) 
   }
   return {
     name,
-    header,
+    header: {...header, label},
     weekday,
     saturday,
     holiday,
@@ -40,10 +47,14 @@ const fetchAndParseLane = async ({name, urls}: {name: string; urls: string[];}) 
 }
 
 const fetchAndParseMultiple = async () => {
-  const lanes = Object.entries(ROUTES).map(([key, routes]) => ({
-    name: key,
-    urls: routes.map(({cs, nid}) => createRouteUrl(cs, nid)),
-  }));
+  const lanes = Object.entries(ROUTES).map(([key, routes]) => {
+    const { header } = routes[0]
+    return {
+      name: key,
+      label: header.label,
+      urls: routes.map(({cs, nid}) => createRouteUrl(cs, nid)),
+    };
+  });
 
   const routeDataGroups = [];
   for (const lane of lanes) {

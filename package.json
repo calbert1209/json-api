@@ -1,0 +1,8 @@
+{
+  "name": "json-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:calbert1209/json-api.git",
+  "author": "Christian Albert <calbert1209@gmail.com>",
+  "license": "MIT"
+}

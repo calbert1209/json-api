@@ -13,6 +13,7 @@ jobs:
           cmd: install
 
       - name: Fetch via Yarn 📦
+        run: mkdir output
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: fetch

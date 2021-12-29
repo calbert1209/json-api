@@ -18,7 +18,8 @@ export enum Stop {
   ofuna,
 }
 
-export type RoutePoints = {
+export type RouteHeader = {
+  label: string;
   busStop: Stop;
   dest: Stop;
 };
@@ -27,7 +28,7 @@ export type Route = {
   name: string;
   cs: string;
   nid: string;
-  header: RoutePoints;
+  header: RouteHeader;
 };
 
 const kanaiTotsuka: Route = {
@@ -35,6 +36,7 @@ const kanaiTotsuka: Route = {
   cs: "0000800324-12",
   nid: "00126844",
   header: {
+    label: "金井 → 戸塚",
     busStop: Stop.kanai,
     dest: Stop.totsuka,
   },
@@ -45,6 +47,7 @@ const totsukaKanai9x: Route = {
   cs: "0000800754-1",
   nid: "00126775",
   header: {
+    label: "戸塚 → 金井",
     busStop: Stop.totsuka,
     dest: Stop.kanai,
   },
@@ -55,6 +58,7 @@ const totsukaKanai7x: Route = {
   cs: "0000800673-1",
   nid: "00126775",
   header: {
+    label: "戸塚 → 金井",
     busStop: Stop.totsuka,
     dest: Stop.kanai,
   },
@@ -65,6 +69,7 @@ const kanaiOfuna: Route = {
   cs: "0000800419-10",
   nid: "00126844",
   header: {
+    label: "金井 → 大船",
     busStop: Stop.kanai,
     dest: Stop.ofuna,
   },
@@ -75,6 +80,7 @@ const ofunaKanai: Route = {
   cs: "0000800324-1",
   nid: "00126855",
   header: {
+    label: "大船 → 金井",
     busStop: Stop.ofuna,
     dest: Stop.kanai,
   },

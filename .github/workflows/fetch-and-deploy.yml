@@ -1,0 +1,31 @@
+name: Fetch 🚛 and Deploy 🏗
+on:
+  push:
+    branches:
+      - main
+jobs:
+  fetch_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install via Yarn 🧶
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Create Directory 📁
+        run: |
+          mkdir output
+
+      - name: Fetch via Yarn 📦
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: fetch
+
+      - name: Deploy 🏗
+        uses: JamesIves/github-pages-deploy-action@4.1.6
+        with:
+          branch: gh-pages
+          folder: output

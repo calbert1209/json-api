@@ -1,5 +1,8 @@
 name: Fetch 🚛 and Deploy 🏗
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   fetch_and_deploy:
     runs-on: ubuntu-latest
